@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Path
+from fastapi import APIRouter, Path, Query
 
 
 router = APIRouter(prefix='/tools')
@@ -14,7 +14,7 @@ router = APIRouter(prefix='/tools')
     },
     description= 'Retorna el listado de herramientas disponibles. Si no ha sido inicializado el inventario retorna una lista vacía.',
 )
-async def get_list() -> list:
+async def get_list(limit: Annotated[int, Query(ge=1, le=500)] = 20, offset: Annotated[int, Query(ge=0, le=500)] = 0) -> list:
     return []
 
 
