@@ -1,6 +1,8 @@
-from typing import Annotated
+from typing import Annotated, List
 
 from fastapi import APIRouter, Path, Query
+
+from server.schemas.tools_api_schemas import NewToolRequest, ToolRequest, ToolResponse
 
 
 router = APIRouter(prefix='/tools')
@@ -14,7 +16,7 @@ router = APIRouter(prefix='/tools')
     },
     description= 'Retorna el listado de herramientas disponibles. Si no ha sido inicializado el inventario retorna una lista vacía.',
 )
-async def get_list(limit: Annotated[int, Query(ge=1, le=500)] = 20, offset: Annotated[int, Query(ge=0, le=500)] = 0) -> list:
+async def get_list(limit: Annotated[int, Query(ge=1, le=500)] = 20, offset: Annotated[int, Query(ge=0)] = 0) -> List[ToolResponse]:
     return []
 
 
@@ -26,8 +28,8 @@ async def get_list(limit: Annotated[int, Query(ge=1, le=500)] = 20, offset: Anno
     },
     description= 'Ingresa una herramienta al inventario con los campos pasados por Body Param. Falla si falta alguno de los campos obligatorios.',
 )
-async def create() -> dict:
-    return {}
+async def create(new_tool: NewToolRequest) -> ToolResponse:
+    return new_tool
 
 
 @router.get(
@@ -39,7 +41,7 @@ async def create() -> dict:
     },
     description= 'Retorna una herramienta por ID. Falla si el ID no existe.',
 )
-async def get_by_id(id: Annotated[int, Path(ge=1)]) -> dict:
+async def get_by_id(id: Annotated[int, Path(ge=1)]) -> ToolResponse:
     return {'id':id}
 
 
@@ -52,8 +54,8 @@ async def get_by_id(id: Annotated[int, Path(ge=1)]) -> dict:
     },
     description= 'Actualiza el estado de la herramienta con los datos del Body Param. Falla si el ID no existe.',
 )
-async def update(id: Annotated[int, Path(ge=1)]) -> dict:
-    return {'id':id}
+async def update(id: Annotated[int, Path(ge=1)], tool: ToolRequest) -> ToolResponse:
+    return tool
 
 
 @router.delete(
