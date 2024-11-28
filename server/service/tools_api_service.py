@@ -1,13 +1,14 @@
 from typing import List
 
 from server.schemas.tools_api_schemas import NewToolRequest, ToolRequest, ToolResponse
+from server.repository.tools_api_repository import ToolsRepository
 
 
 class ToolsService:
 
     def __init__(self):
-        # HACER: Instanciar repositorio
-        pass
+        # Hecho: Instanciar repositorio
+        self.repo = ToolsRepository()
 
     def create(self, new_tool: NewToolRequest) -> ToolResponse:
         # HACER:
