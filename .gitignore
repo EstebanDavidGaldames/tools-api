@@ -3,3 +3,6 @@
 
 # Virtual Enviroment
 venv/*
+
+# Secrets
+.env

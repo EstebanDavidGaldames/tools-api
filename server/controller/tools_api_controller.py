@@ -18,7 +18,7 @@ class ToolsController:
             #return ToolResponse(id= 1, **new_tool.model_dump())
             return self.service.create(new_tool)
         except BaseHTTPException as ex:
-            # Se debe implementar loggin
+            # Se debe implementar logging
             raise ex
         except Exception:
             # Error no implementado en ToolsController.create
