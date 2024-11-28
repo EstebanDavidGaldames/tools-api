@@ -4,9 +4,11 @@ uvicorn==0.32.1
 # FastAPI - Web framework
 fastapi==0.115.5
 
-# Config packege
+# Config package
 # Settings management using pydantic
 pydantic-settings==2.6.1
 
 # Data management
 requests==2.32.3
+SQLAlchemy==2.0.36
+psycopg2-binary==2.9.10
