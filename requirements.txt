@@ -7,3 +7,6 @@ fastapi==0.115.5
 # Config packege
 # Settings management using pydantic
 pydantic-settings==2.6.1
+
+# Data management
+requests==2.32.3
