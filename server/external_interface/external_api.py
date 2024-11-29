@@ -1,9 +1,10 @@
+# PARA PRUEBA DE OBTENCIÓN DE DATOS MEDIANTE API EXTERNA
 import logging
 
 import requests
 
 from server.configs import app_settings
-# from server.schemas.tools_api_schemas import NewToolRequest, ToolRequest, ToolResponse --> Import when implement objects required
+# from server.schemas.tools_api_schemas import NewToolRequest, ToolRequest, ToolResponse --> Importar cuando se implemente
 
 
 logger = logging.getLogger(__name__)

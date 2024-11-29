@@ -1,12 +1,9 @@
-#from typing import List
-
-from server.schemas.tools_api_schemas import NewToolRequest, ToolRequest, ToolResponse
-# from server.external_interface import external_data_client --> Use it for external data resource
 from server.database import db_connection # -> Para trabajar la base de datos
 from server.database.models import ToolModel # -> Para trabajar la base de datos
 
 
 class ToolsRepository:
+    
     def __init__(self):
         self.db = db_connection.session
 
@@ -17,23 +14,14 @@ class ToolsRepository:
         self.db.refresh(new_tool)
         return self.__to_dict(new_tool)
 
-    #def create(self, new_tool: NewToolRequest) -> ToolResponse:
-    #    pass
-
     def get_list(self, limit: int, offset: int) -> list[dict]:
         tools = self.db.query(ToolModel).order_by('id').limit(limit).offset(offset).all()
         return [self.__to_dict(tool) for tool in tools]
-
-    #def get_list(self, limit: int, offset: int) -> List[ToolResponse]:
-    #    pass
 
     def get_by_id(self, tool_id: int) -> dict | None:
         tool = self.__get_one(tool_id)
         if tool is None: return
         return self.__to_dict(tool)
-
-    #def get_by_id(self, id: int) -> ToolResponse:
-    #    pass
 
     def update(self, id: int, new_tool_data: dict) -> dict | None:
         tool = self.__get_one(id)
@@ -44,18 +32,12 @@ class ToolsRepository:
         self.db.refresh(tool)
         return self.__to_dict(tool)
 
-    #def update(self, id: int, new_tool_data: ToolRequest) -> ToolResponse:
-    #    pass
-
     def delete(self, id: int) -> bool:
         tool = self.__get_one(id)
         if tool is None: return False
         self.db.delete(tool)
         self.db.commit()
         return True
-
-    #def delete(self, id: int) -> None:
-    #    pass
 
     def __get_one(self, tool_id: int) -> ToolModel | None:
         return self.db.query(ToolModel).filter_by(id=tool_id).first()
@@ -65,4 +47,3 @@ class ToolsRepository:
             column.name: getattr(tool, column.name)
             for column in ToolModel.__table__.columns
         }
-    

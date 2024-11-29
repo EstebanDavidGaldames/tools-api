@@ -63,7 +63,7 @@ async def get_by_id(id: Annotated[int, Path(ge=1)]) -> ToolResponse:
     description= 'Actualiza el estado de la herramienta con los datos del Body Param. Falla si el ID no existe.',
 )
 async def update(id: Annotated[int, Path(ge=1)], tool: ToolRequest) -> ToolResponse:
-    return controller.update(tool)
+    return controller.update(id, tool)
 
 
 @router.delete(
